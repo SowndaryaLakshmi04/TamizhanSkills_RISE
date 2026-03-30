@@ -23,10 +23,6 @@ Booklyn is a responsive online bookstore frontend built using HTML, CSS, and Jav
 
 No installation or setup required.
 
-## 🌐 Deployment
-You can deploy easily using Netlify:
-https://app.netlify.com/drop
-
 ## 📌 Future Improvements
 - Add backend integration (Node.js / Firebase)
 - User login & authentication
