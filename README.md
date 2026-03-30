@@ -15,7 +15,7 @@ Booklyn is a responsive online bookstore frontend built using HTML, CSS, and Jav
 ## 🛠️ Tech Stack
 - HTML5
 - CSS3
-- JavaScript (Vanilla)
+- JavaScript 
 
 ## ▶️ How to Run
 1. Download or clone the repository
