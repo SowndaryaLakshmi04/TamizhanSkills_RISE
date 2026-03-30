@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booklyn — Your Literary Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <header class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#" class="logo" onclick="showPage('home')">
+        <span class="logo-icon">B</span>
+        <span class="logo-text">Booklyn</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#" class="nav-link active" data-page="home" onclick="showPage('home');closeMobileMenu()">Home</a>
+        <a href="#" class="nav-link" data-page="books" onclick="showPage('books');closeMobileMenu()">Books</a>
+        <a href="#" class="nav-link" data-page="cart" onclick="showPage('cart');closeMobileMenu()">Cart</a>
+        <a href="#" class="nav-link" data-page="contact" onclick="showPage('contact');closeMobileMenu()">Contact</a>
+      </nav>
+      <button class="cart-btn" onclick="showPage('cart')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ── HOME PAGE ── -->
+  <main id="page-home" class="page active">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <p class="hero-eyebrow">Welcome to Booklyn</p>
+        <h1 class="hero-title">Every book<br/><em>tells a story</em><br/>worth living.</h1>
+        <p class="hero-sub">Curated reads for curious minds. Discover your next favourite world between the pages.</p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="showPage('books')">Browse Collection</button>
+          <button class="btn-ghost" onclick="document.getElementById('featured').scrollIntoView({behavior:'smooth'})">Featured Today ↓</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-stack">
+          <div class="book-spine s1"></div>
+          <div class="book-spine s2"></div>
+          <div class="book-spine s3"></div>
+          <div class="book-spine s4"></div>
+          <div class="book-spine s5"></div>
+        </div>
+        <div class="hero-badge">
+          <span>2,400+</span>
+          <small>Titles</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category Filter -->
+    <section class="categories-bar" id="featured">
+      <div class="container">
+        <div class="section-label">Browse by genre</div>
+        <div class="cat-chips" id="catChips">
+          <button class="cat-chip active" data-cat="all">All Books</button>
+          <button class="cat-chip" data-cat="Fiction">Fiction</button>
+          <button class="cat-chip" data-cat="Non-Fiction">Non-Fiction</button>
+          <button class="cat-chip" data-cat="Self-Help">Self-Help</button>
+          <button class="cat-chip" data-cat="Science">Science</button>
+          <button class="cat-chip" data-cat="Philosophy">Philosophy</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Book Grid -->
+    <section class="books-section container">
+      <div class="section-header">
+        <h2 class="section-title">Featured Collection</h2>
+        <a href="#" class="view-all" onclick="showPage('books');return false;">View all →</a>
+      </div>
+      <div class="books-grid" id="homeGrid"></div>
+    </section>
+
+    <!-- Banner -->
+    <section class="promo-banner">
+      <div class="container">
+        <div class="promo-inner">
+          <div class="promo-text">
+            <p class="promo-eyebrow">Limited offer</p>
+            <h3>Free shipping on orders over ₹999</h3>
+            <p>Use code <strong>BOOKLYN20</strong> for 20% off your first order.</p>
+          </div>
+          <button class="btn-primary light" onclick="showPage('books')">Shop Now</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── BOOKS PAGE ── -->
+  <main id="page-books" class="page">
+    <div class="page-hero simple">
+      <div class="container">
+        <h2 class="page-title">Our Collection</h2>
+        <p>Handpicked titles across every genre — something for every reader.</p>
+      </div>
+    </div>
+    <section class="books-section container">
+      <div class="filter-bar">
+        <div class="cat-chips" id="booksPageCatChips">
+          <button class="cat-chip active" data-cat="all">All</button>
+          <button class="cat-chip" data-cat="Fiction">Fiction</button>
+          <button class="cat-chip" data-cat="Non-Fiction">Non-Fiction</button>
+          <button class="cat-chip" data-cat="Self-Help">Self-Help</button>
+          <button class="cat-chip" data-cat="Science">Science</button>
+          <button class="cat-chip" data-cat="Philosophy">Philosophy</button>
+        </div>
+        <div class="sort-wrap">
+          <select id="sortBooks" onchange="renderBooksPage()">
+            <option value="default">Sort: Featured</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+      <div class="books-grid" id="booksGrid"></div>
+    </section>
+  </main>
+
+  <!-- ── CART PAGE ── -->
+  <main id="page-cart" class="page">
+    <div class="page-hero simple">
+      <div class="container">
+        <h2 class="page-title">Your Cart</h2>
+      </div>
+    </div>
+    <section class="cart-section container">
+      <div class="cart-layout">
+        <div class="cart-items" id="cartItems">
+          <!-- filled by JS -->
+        </div>
+        <aside class="cart-summary" id="cartSummary">
+          <!-- filled by JS -->
+        </aside>
+      </div>
+      <div class="cart-empty hidden" id="cartEmpty">
+        <div class="empty-icon">📚</div>
+        <h3>Your cart is empty</h3>
+        <p>Looks like you haven't added anything yet.</p>
+        <button class="btn-primary" onclick="showPage('books')">Start Browsing</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── CONTACT PAGE ── -->
+  <main id="page-contact" class="page">
+    <div class="page-hero simple">
+      <div class="container">
+        <h2 class="page-title">Get in Touch</h2>
+        <p>We'd love to hear from you — questions, recommendations, or just a hello.</p>
+      </div>
+    </div>
+    <section class="contact-section container">
+      <div class="contact-layout">
+        <div class="contact-info">
+          <h3>Visit Our Store</h3>
+          <div class="contact-item"><span>📍</span><p>12 Literary Lane, Book Street<br/>Mumbai, Maharashtra 400001</p></div>
+          <div class="contact-item"><span>📞</span><p>+91 98765 43210</p></div>
+          <div class="contact-item"><span>✉️</span><p>hello@booklyn.in</p></div>
+          <div class="contact-item"><span>🕐</span><p>Mon–Sat: 9am – 8pm<br/>Sunday: 10am – 6pm</p></div>
+        </div>
+        <form class="contact-form" onsubmit="submitContact(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" placeholder="Your name" required />
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" placeholder="you@email.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <input type="text" placeholder="How can we help?" />
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea rows="5" placeholder="Tell us anything..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary full">Send Message</button>
+          <p class="form-success hidden" id="formSuccess">✓ Message sent! We'll get back to you soon.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="logo-icon">B</span>
+        <span class="logo-text">Booklyn</span>
+        <p>Your literary home since 2026.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <a href="#" onclick="showPage('books')">All Books</a>
+          <a href="#" onclick="showCat('Fiction')">Fiction</a>
+          <a href="#" onclick="showCat('Self-Help')">Self-Help</a>
+        </div>
+        <div class="footer-col">
+          <h4>Help</h4>
+          <a href="#" onclick="showPage('contact')">Contact Us</a>
+          <a href="#">Shipping Info</a>
+          <a href="#">Returns</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <p>© 2026 Booklyn. Crafted with love for book lovers.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
